@@ -31,5 +31,6 @@ CREATE TABLE borrow (
     id INT unsigned not null primary key COMMENT 'Id',
     book_id INT not null COMMENT '书籍id',
     member_id INT not null COMMENT '会员id',
-    borrow_Time date not null COMMENT '借出时间'
+    borrow_Time date not null COMMENT '借出时间',
+    status VARCHAR(8) not null COMMENT '借阅状态'
 ) COMMENT = '借阅表';
