@@ -11,5 +11,5 @@ public class Borrow {
     private Integer bookId;
     private Integer memberId;
     private Date borrowTime;
-
+    private String statues;
 }
