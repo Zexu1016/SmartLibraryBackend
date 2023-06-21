@@ -15,4 +15,9 @@ public interface BorrowMapper {
     @Insert("INSERT INTO borrow (book_id, member_id, borrow_Time, status) " +
             "VALUE (#{bookId}, #{memberId}, #{borrowTime}, #{status})")
     public Boolean insert(Borrow borrow);
+
+    @Select("SELECT COUNT(member_id) FROM borrow WHERE member_id = #{memberId}")
+    public Integer selectCountByMemberId(Integer memberId);
+
+
 }
