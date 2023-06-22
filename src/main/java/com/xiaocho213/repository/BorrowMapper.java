@@ -5,6 +5,7 @@ import com.xiaocho213.repository.entity.Borrow;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 @Mapper
 public interface BorrowMapper {
@@ -20,4 +21,9 @@ public interface BorrowMapper {
     public Integer selectCountByMemberId(Integer memberId);
 
 
+    @Select("SELECT * FROM borrow WHERE book_id = #{bookId}")
+    public Borrow selectByBookId(Integer bookId);
+
+    @Update("UPDATE borrow SET status = '已归还' WHERE id = #{id}")
+    public Boolean returnBookById(Integer id);
 }

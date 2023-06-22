@@ -18,7 +18,8 @@ CREATE TABLE member (
     id INT unsigned not null primary key AUTO_INCREMENT COMMENT 'Id',
     name VARCHAR(6) not null COMMENT '会员姓名',
     gender VARCHAR(2) not null COMMENT '会员性别',
-    level INT(1) not null COMMENT '会员级别'
+    level INT(1) not null COMMENT '会员级别',
+    borrowed_count INT not null COMMENT '已借书数'
 ) COMMENT = '会员表';
 
 CREATE TABLE member_info (

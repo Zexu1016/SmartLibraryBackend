@@ -31,9 +31,10 @@ public class BorrowServiceImpl implements BorrowService {
         Integer Level = memberMapper.selectLevelById(memberId);
 
         Integer borrowingLimit = authorityMapper.selectBorrowingLimitByLevel(Level);
-        Integer countByMemberId = borrowMapper.selectCountByMemberId(memberId);
+//        Integer countByMemberId = borrowMapper.selectCountByMemberId(memberId);
+        Integer borrowedCount = memberMapper.selectBorrowedCountById(memberId);
 
-        if (countByMemberId > borrowingLimit)
+        if (borrowedCount > borrowingLimit)
             return Boolean.FALSE;
 
 
@@ -44,12 +45,21 @@ public class BorrowServiceImpl implements BorrowService {
         borrow.setStatues("已借出");
 
         borrowMapper.insert(borrow);
+
+        memberMapper.increaseBorrowedCountById(memberId);
         return Boolean.TRUE;
     }
 
     @Override
     public Boolean returnBook(ReturnBookDTO returnBookDTO) {
 
+        Borrow borrow = borrowMapper.selectByBookId(returnBookDTO.getBookId());
+
+        //TODO 校验是否把书放在正确的位置上
+
+
+        memberMapper.decreaseBorrowedCountById(borrow.getMemberId());
+        borrowMapper.returnBookById(borrow.getId());
         return null;
     }
 }

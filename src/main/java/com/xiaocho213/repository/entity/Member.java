@@ -9,4 +9,5 @@ public class Member {
     private String name;
     private String gender;
     private Integer level;
+    private Integer borrowedCount;
 }
