@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Select;
 public interface AuthorityMapper {
 
     @Select("select borrowing_limit from authority where level = #{level}")
-    public Authority selectBorrowingLimitByLevel(Integer level);
+    public Integer selectBorrowingLimitByLevel(Integer level);
 
 
 }
