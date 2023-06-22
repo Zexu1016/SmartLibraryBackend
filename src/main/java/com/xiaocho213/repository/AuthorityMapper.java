@@ -1,6 +1,6 @@
 package com.xiaocho213.repository;
 
-import com.xiaocho213.repository.entity.Authority;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 

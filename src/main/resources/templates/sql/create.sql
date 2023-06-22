@@ -4,7 +4,8 @@ CREATE TABLE book (
     title VARCHAR(20) not null COMMENT '书名',
     author VARCHAR(10) not null COMMENT '作者',
     press VARCHAR(20) not null COMMENT '出版社',
-    location VARCHAR(20) not null COMMENT '位置',
+    bookshelf VARCHAR(20) not null COMMENT '所在书架号',
+    layer INT not null COMMENT '所在层',
     type VARCHAR(5) not null COMMENT '类别'
 ) COMMENT = '图书表';
 

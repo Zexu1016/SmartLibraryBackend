@@ -1,5 +1,6 @@
 package com.xiaocho213.service.impl;
 
+import com.xiaocho213.common.utils.BookStatus;
 import com.xiaocho213.controller.request.BorrowBookDTO;
 import com.xiaocho213.controller.request.ReturnBookDTO;
 import com.xiaocho213.repository.AuthorityMapper;
@@ -37,12 +38,11 @@ public class BorrowServiceImpl implements BorrowService {
         if (borrowedCount > borrowingLimit)
             return Boolean.FALSE;
 
-
         Borrow borrow = new Borrow();
         borrow.setBookId(borrowBookDTO.getBookId());
         borrow.setMemberId(borrowBookDTO.getMemberId());
         borrow.setBorrowTime(new Timestamp(System.currentTimeMillis()));
-        borrow.setStatues("已借出");
+        borrow.setStatues(BookStatus.BORROWED);
 
         borrowMapper.insert(borrow);
 
@@ -60,6 +60,6 @@ public class BorrowServiceImpl implements BorrowService {
 
         memberMapper.decreaseBorrowedCountById(borrow.getMemberId());
         borrowMapper.returnBookById(borrow.getId());
-        return null;
+        return Boolean.TRUE;
     }
 }
