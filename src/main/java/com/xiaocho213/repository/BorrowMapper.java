@@ -24,6 +24,6 @@ public interface BorrowMapper {
     @Select("SELECT * FROM borrow WHERE book_id = #{bookId}")
     public Borrow selectByBookId(Integer bookId);
 
-    @Update("UPDATE borrow SET status = '已归还' WHERE id = #{id}")
-    public Boolean returnBookById(Integer id);
+    @Update("UPDATE borrow SET status = #{status} WHERE id = #{id}")
+    public Boolean changeBorrowStatus(Integer id , String status);
 }

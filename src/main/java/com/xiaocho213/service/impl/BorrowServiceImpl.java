@@ -59,7 +59,7 @@ public class BorrowServiceImpl implements BorrowService {
 
 
         memberMapper.decreaseBorrowedCountById(borrow.getMemberId());
-        borrowMapper.returnBookById(borrow.getId());
+        borrowMapper.changeBorrowStatus(borrow.getId(), BookStatus.RETURNED);
         return Boolean.TRUE;
     }
 }
