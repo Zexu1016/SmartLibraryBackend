@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 @Mapper
-public interface MemberMapper {
+public interface UserMapper {
 
     @Select("SELECT level FROM member WHERE id = #{id}")
     public Integer selectLevelById(Integer id);

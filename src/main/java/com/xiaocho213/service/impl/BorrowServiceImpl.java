@@ -5,7 +5,7 @@ import com.xiaocho213.controller.request.BorrowBookDTO;
 import com.xiaocho213.controller.request.ReturnBookDTO;
 import com.xiaocho213.repository.AuthorityMapper;
 import com.xiaocho213.repository.BorrowMapper;
-import com.xiaocho213.repository.MemberMapper;
+import com.xiaocho213.repository.UserMapper;
 import com.xiaocho213.repository.entity.Borrow;
 import com.xiaocho213.service.BorrowService;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +17,7 @@ import java.sql.Timestamp;
 @RequiredArgsConstructor
 public class BorrowServiceImpl implements BorrowService {
     private final BorrowMapper borrowMapper;
-    private final MemberMapper memberMapper;
+    private final UserMapper userMapper;
     private final AuthorityMapper authorityMapper;
 
     @Override
@@ -29,11 +29,11 @@ public class BorrowServiceImpl implements BorrowService {
     public Boolean borrowBook(BorrowBookDTO borrowBookDTO) {
 
         Integer memberId = borrowBookDTO.getMemberId();
-        Integer Level = memberMapper.selectLevelById(memberId);
+        Integer Level = userMapper.selectLevelById(memberId);
 
         Integer borrowingLimit = authorityMapper.selectBorrowingLimitByLevel(Level);
 //        Integer countByMemberId = borrowMapper.selectCountByMemberId(memberId);
-        Integer borrowedCount = memberMapper.selectBorrowedCountById(memberId);
+        Integer borrowedCount = userMapper.selectBorrowedCountById(memberId);
 
         if (borrowedCount > borrowingLimit)
             return Boolean.FALSE;
@@ -46,7 +46,7 @@ public class BorrowServiceImpl implements BorrowService {
 
         borrowMapper.insert(borrow);
 
-        memberMapper.increaseBorrowedCountById(memberId);
+        userMapper.increaseBorrowedCountById(memberId);
         return Boolean.TRUE;
     }
 
@@ -58,7 +58,7 @@ public class BorrowServiceImpl implements BorrowService {
         //TODO 校验是否把书放在正确的位置上
 
 
-        memberMapper.decreaseBorrowedCountById(borrow.getMemberId());
+        userMapper.decreaseBorrowedCountById(borrow.getMemberId());
         borrowMapper.changeBorrowStatus(borrow.getId(), BookStatus.RETURNED);
         return Boolean.TRUE;
     }
