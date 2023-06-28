@@ -24,9 +24,9 @@ CREATE TABLE user (
     borrowed_count INT NOT NULL COMMENT '已借书数'
 ) COMMENT = '会员表';
 
-CREATE TABLE menu (
+CREATE TABLE permission (
     id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT 'Id',
-    menu_name VARCHAR(64) NOT NULL COMMENT '权限名'
+    permission_name VARCHAR(64) NOT NULL COMMENT '权限名'
 ) COMMENT = '权限表';
 
 CREATE TABLE role (
@@ -37,7 +37,7 @@ CREATE TABLE role (
 CREATE TABLE role_menu (
     id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT 'Id',
     role_id INT NOT NULL COMMENT '角色id',
-    menu_id INT NOT NULL COMMENT '权限id'
+    permission_id INT NOT NULL COMMENT '权限id'
 ) COMMENT = '角色-权限表';
 
 CREATE TABLE user_role (
